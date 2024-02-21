@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Red Flag R024{% endblock %}
+
+{% block head_extra %}
+<!-- Aquí puedes agregar elementos extra específicos de esta página al head -->
+{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Red Flag R024</h1>
+    <p>La premisa detrás de esta señal de alerta radica en la expectativa de que, en un proceso 
+        de licitación competitivo y transparente, debería existir una cierta variabilidad entre 
+        las ofertas presentadas. Una diferencia muy pequeña entre las dos ofertas más bajas 
+        podría sugerir varias situaciones anómalas, como colusión entre proveedores, donde se 
+        acuerdan previamente los precios de las ofertas para minimizar la competencia real, o 
+        incluso errores en la preparación de las ofertas.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nog Concurso</th>
+                <th>Oferta Ganadora</th>
+                <th>Monto Ganador</th>
+                <th>Segunda Oferta mas Baja</th>
+                <th>Monto Segundo</th>
+                <th>Diferencia %</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flag in red_flags %}
+            <tr>
+                <td>{{ flag['nogConcurso'] }}</td>
+                <td>{{ flag['oferta_ganadora'] }}</td>
+                <td>{{ flag['monto_ganador'] }}</td>
+                <td>{{ flag['segunda_oferta_mas_baja'] }}</td>
+                <td>{{ flag['monto_segundo'] }}</td>
+                <td>{{ flag['diferencia_porcentual'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

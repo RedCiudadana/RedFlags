@@ -1,0 +1,104 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #007BFF;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+footer {
+    background-color: #f2f2f2;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    cursor: pointer;
+}
+
+/* Estilos del Menú de Navegación */
+.nav-wrapper {
+    background-color: #007bff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    align-items: center;
+}
+
+.nav-wrapper .brand-logo {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+ul#nav-mobile {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul#nav-mobile li a {
+    color: #ffffff;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+}
+
+ul#nav-mobile li a:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .nav-wrapper {
+        flex-direction: column;
+    }
+
+    ul#nav-mobile {
+        flex-direction: column;
+        width: 100%;
+    }
+}

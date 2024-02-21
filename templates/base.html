@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Red Flags{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo"><img src="{{ url_for('static', filename='img/LOGO-Red_BLANCO.png') }}"></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/red_flags/r024">Red Flag R024</a></li>
+                    <li><a href="/red_flags/r028">Red Flag R028</a></li>
+                    <!-- Agrega más enlaces según sea necesario -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Contenido principal que será sobreescrito por plantillas hijas -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Red Ciudadana. Todos los derechos reservados.</p>
+    </footer>
+
+    {% block scripts %}
+    <!-- Bloque para scripts al final del body que puede ser sobreescrito -->
+    {% endblock %}
+</body>
+</html>
