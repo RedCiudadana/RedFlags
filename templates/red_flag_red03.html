@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Red Flag Red03{% endblock %}
+
+{% block head_extra %}
+<!-- Aquí puedes agregar elementos extra específicos de esta página al head -->
+{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Red Flag Red03</h1>
+    <p>El principal objetivo de esta red flag es resaltar posibles ineficiencias o irregularidades en el proceso de adjudicación de contratos. Un retraso significativo puede ser indicativo de varios problemas, tales como:
+    </p>
+    <ul>
+        <li>Disputas Legales: Puede que existan impugnaciones o reclamaciones por parte de los licitantes no favorecidos, lo que podría retrasar el proceso de formalización.</li>
+        <li>Reconsideración de Decisiones: La entidad puede estar reconsiderando la adjudicación debido a la detección de errores en el proceso de evaluación o en la oferta del adjudicatario.</li>
+        <li>Negociaciones Inapropiadas: Después de la decisión de adjudicación, podrían surgir negociaciones no éticas que busquen modificar términos del contrato de manera ventajosa para alguna de las partes.</li>
+        <li>Problemas Administrativos o Burocráticos: Retrasos en la formalización también pueden ser resultado de ineficiencias administrativas dentro de la entidad contratante.</li>
+    </ul>
+        
+    <table style="max-width: 100%;">
+        <thead>
+            <tr>
+                <th>Nog Concurso</th>
+                <th style="max-width: 100px;">Descripción</th>
+                <th>Nombre de la entidad compradora</th>
+                <th>Fecha de Última Adjudicación</th>
+                <th>Fecha de Adjudicación</th>
+                <th>Días de Retraso</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flag in red_flags %}
+            <tr>
+                <td>{{ flag['nogConcurso'] }}</td>
+                <td>{{ flag['descripcion'] }}</td>
+                <td>{{ flag['entidadCompradora'] }}</td>
+                <td>{{ flag['fechaDeUltimaAdjudicacion'] }}</td>
+                <td>{{ flag['fechaDeAdjudicacion'] }}</td>
+                <td>{{ flag['dias_de_retraso'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

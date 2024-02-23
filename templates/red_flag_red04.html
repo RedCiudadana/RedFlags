@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Red Flag Red04{% endblock %}
+
+{% block head_extra %}
+<!-- Aquí puedes agregar elementos extra específicos de esta página al head -->
+{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Red Flag Red04</h1>
+    <p>Está diseñada para identificar a aquellos concursantes que aparecen una o dos veces en el conjunto total de concursos registrados dentro de una base de datos de contratación pública. Este indicador busca resaltar la participación de entidades que, por su escasa presencia en licitaciones, podrían considerarse atípicas o merecedoras de un análisis más profundo. La razón para focalizar en estos concursantes es múltiple y puede abarcar desde la detección de nuevas empresas intentando ingresar al mercado hasta la identificación de empresas potencialmente creadas para participar en concursos específicos, pasando por la posibilidad de encontrar prácticas que limiten la competencia justa y abierta.</p>
+    <p>El objetivo principal detrás de esta red flag es promover la transparencia y la equidad en los procesos de contratación pública. Al identificar a estos concursantes inusuales, se pueden tomar medidas para investigar su historial, capacidad, y legitimidad, asegurando así que todos los participantes en una licitación cumplen con los requisitos y están en igualdad de condiciones para competir. Este análisis también puede ayudar a prevenir el favoritismo, el fraude, y otras prácticas anticompetitivas que podrían afectar negativamente la calidad y el costo de los bienes y servicios adquiridos por entidades públicas.</p>
+        
+    <table style="max-width: 100%;">
+        <thead>
+            <tr>
+                <th>Nombre del Concursante</th>
+                <th>Número de concursos a su nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flag in red_flags %}
+            <tr>
+                <td>{{ flag['nombre'] }}</td>
+                <td>{{ flag['cantidad_de_veces'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

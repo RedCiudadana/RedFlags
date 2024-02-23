@@ -29,20 +29,6 @@ def get_db_connection():
     conn = psycopg2.connect(**db_params)
     return conn
 
-def fetch_red_flags_r028():
-    conn = get_db_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)  
-    cur.execute("""
-    SELECT "nogConcurso", COUNT(*) as count
-    FROM concurso_presupuesto_2023
-    GROUP BY "nogConcurso", "monto"
-    HAVING COUNT(*) > 1
-    """)
-    red_flags = cur.fetchall()
-    cur.close()
-    conn.close()
-    return red_flags
-
 def fetch_red_flags_r024():
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)  
@@ -82,10 +68,122 @@ def fetch_red_flags_r024():
     conn.close()
     return red_flags
 
+def fetch_red_flags_red01():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  
+    cur.execute("""
+    SELECT
+        "nogConcurso",
+        "descripcion",
+        "entidadCompradora",
+        "fechaDePublicacion",
+        "fechaCierreRecepcionOfertas",
+        "fechaCierreRecepcionOfertas" - "fechaDePublicacion" AS duracion_concurso_dias
+    FROM concurso_presupuesto_2023
+    WHERE "fechaCierreRecepcionOfertas" - "fechaDePublicacion" < 2
+    ORDER BY duracion_concurso_dias ASC;
+    """)
+    red_flags = cur.fetchall()
+    cur.close()
+    conn.close()
+    return red_flags
+
+def fetch_red_flags_red02():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  
+    cur.execute("""
+    SELECT
+        "nogConcurso",
+        "descripcion",
+        "entidadCompradora",
+        "fechaDePublicacion",
+        "fechaCierreRecepcionOfertas",
+        "fechaCierreRecepcionOfertas" - "fechaDePublicacion" AS duracion_concurso_dias
+    FROM concurso_presupuesto_2023
+    WHERE "fechaCierreRecepcionOfertas" - "fechaDePublicacion" > 120
+    ORDER BY duracion_concurso_dias ASC;
+    """)
+    red_flags = cur.fetchall()
+    cur.close()
+    conn.close()
+    return red_flags
+
+def fetch_red_flags_red03():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  
+    cur.execute("""
+    SELECT
+        "nogConcurso",
+        "descripcion",
+        "entidadCompradora",
+        "fechaDeUltimaAdjudicacion",
+        "fechaDeAdjudicacion",
+        "fechaDeUltimaAdjudicacion" - "fechaDeAdjudicacion" AS dias_de_retraso
+    FROM concurso_presupuesto_2023
+    WHERE
+        "fechaDeUltimaAdjudicacion" - "fechaDeAdjudicacion" > 30 -- Asumiendo un umbral de 30 días como significativo
+        AND "estatusDelConcurso" = 'Adjudicado' -- Filtro por concursos ya adjudicados
+    ORDER BY dias_de_retraso DESC; -- Ordena los resultados para mostrar primero los de mayor retraso
+    """)
+    red_flags = cur.fetchall()
+    cur.close()
+    conn.close()
+    return red_flags
+
+def fetch_red_flags_red04():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  
+    cur.execute("""
+    SELECT
+        nombre,
+        COUNT(*) AS cantidad_de_veces
+    FROM concurso_presupuesto_2023
+    GROUP BY nombre
+    HAVING COUNT(*) <= 2
+    ORDER BY cantidad_de_veces ASC, nombre;
+    """)
+    red_flags = cur.fetchall()
+    cur.close()
+    conn.close()
+    return red_flags
+
+def fetch_red_flags_red05():
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=RealDictCursor)  
+    cur.execute("""
+    WITH promedio_categoria AS (
+        SELECT
+            "categorias",
+            AVG("monto") AS promedio_monto
+        FROM concurso_presupuesto_2023
+        WHERE "estatusDelConcurso" = 'Adjudicado'
+        GROUP BY "categorias"
+    )
+    SELECT
+        cp."nogConcurso",
+        cp."descripcion",
+        cp."categorias",
+        cp."monto",
+        pc."promedio_monto",
+        ROUND(ABS(cp."monto" - pc."promedio_monto") / pc."promedio_monto" * 100,2) AS desviacion_porcentual
+    FROM concurso_presupuesto_2023 cp
+    JOIN promedio_categoria pc ON cp."categorias" = pc."categorias"
+    WHERE cp."estatusDelConcurso" = 'Adjudicado'
+    AND ABS(cp."monto" - pc."promedio_monto") / pc."promedio_monto" * 100 > 100000 -- Ejemplo de umbral de desviación: 100000%
+    ORDER BY desviacion_porcentual DESC;
+    """)
+    red_flags = cur.fetchall()
+    cur.close()
+    conn.close()
+    return red_flags
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
+@app.route('/redflags')
+def redflags():
+    return render_template('redflags.html')
 
 @app.route('/red_flags/r024')
 def red_flag_r024_page():
@@ -93,11 +191,35 @@ def red_flag_r024_page():
     # Renderiza una plantilla específica para esta red flag
     return render_template('red_flag_r024.html', red_flags=red_flags)
 
-@app.route('/red_flags/r028')
-def red_flag_r028_page():
-    red_flags = fetch_red_flags_r028()
+@app.route('/red_flags/red01')
+def red_flag_red01_page():
+    red_flags = fetch_red_flags_red01()
     # Renderiza una plantilla específica para esta red flag
-    return render_template('red_flag_r028.html', red_flags=red_flags)
+    return render_template('red_flag_red01.html', red_flags=red_flags)
+
+@app.route('/red_flags/red02')
+def red_flag_red02_page():
+    red_flags = fetch_red_flags_red02()
+    # Renderiza una plantilla específica para esta red flag
+    return render_template('red_flag_red02.html', red_flags=red_flags)
+
+@app.route('/red_flags/red03')
+def red_flag_red03_page():
+    red_flags = fetch_red_flags_red03()
+    # Renderiza una plantilla específica para esta red flag
+    return render_template('red_flag_red03.html', red_flags=red_flags)
+
+@app.route('/red_flags/red04')
+def red_flag_red04_page():
+    red_flags = fetch_red_flags_red04()
+    # Renderiza una plantilla específica para esta red flag
+    return render_template('red_flag_red04.html', red_flags=red_flags)
+
+@app.route('/red_flags/red05')
+def red_flag_red05_page():
+    red_flags = fetch_red_flags_red05()
+    # Renderiza una plantilla específica para esta red flag
+    return render_template('red_flag_red05.html', red_flags=red_flags)
 
 if __name__ == '__main__':
     app.run(debug=True)

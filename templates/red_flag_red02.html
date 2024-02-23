@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Red Flag Red02{% endblock %}
+
+{% block head_extra %}
+<!-- Aquí puedes agregar elementos extra específicos de esta página al head -->
+{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Red Flag Red01</h1>
+    <p>La nueva señal de alerta o "red flag" que hemos desarrollado tiene como objetivo identificar aquellos concursos de contratación pública cuya duración, es decir, el periodo entre la fecha de publicación del concurso y la fecha límite para la recepción de ofertas, es sospechosamente corta, específicamente menos de dos días. Esta métrica es particularmente útil para resaltar procesos de licitación que podrían estar diseñados para restringir la competencia al no proporcionar a los posibles licitantes suficiente tiempo para preparar y presentar ofertas competitivas.</p>
+    <p>Una duración tan corta en un proceso de licitación puede ser indicativa de varias prácticas preocupantes, como favoritismo hacia ciertos proveedores que ya estaban informados del concurso con antelación, o un intento de limitar la participación en la licitación a un círculo cerrado de oferentes, reduciendo así la transparencia y la equidad del proceso de contratación. Tales prácticas no solo van en contra de los principios de competencia justa y abierta, sino que también pueden resultar en que la entidad contratante no obtenga el mejor valor por su dinero, dado que la competencia limitada frecuentemente conduce a precios más altos y a una menor calidad en los bienes o servicios adquiridos.</p>
+    <table style="max-width: 100%;">
+        <thead>
+            <tr>
+                <th>Nog Concurso</th>
+                <th style="max-width: 100px;">Descripción</th>
+                <th>Nombre de la entidad compradora</th>
+                <th>Fecha de Publicación</th>
+                <th>Fecha de Cierre de Concurso</th>
+                <th>Duración del Concurso en días</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flag in red_flags %}
+            <tr>
+                <td>{{ flag['nogConcurso'] }}</td>
+                <td>{{ flag['descripcion'] }}</td>
+                <td>{{ flag['entidadCompradora'] }}</td>
+                <td>{{ flag['fechaDePublicacion'] }}</td>
+                <td>{{ flag['fechaCierreRecepcionOfertas'] }}</td>
+                <td>{{ flag['duracion_concurso_dias'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

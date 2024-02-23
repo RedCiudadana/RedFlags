@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Red Flag Red05{% endblock %}
+
+{% block head_extra %}
+<!-- Aquí puedes agregar elementos extra específicos de esta página al head -->
+{% endblock %}
+
+{% block content %}
+    <h1>Detalle de Red Flag Red05</h1>
+    <p>Está diseñada para identificar concursos de contratación pública donde el monto adjudicado se aleja significativamente del promedio de montos adjudicados para concursos similares dentro de una misma categoría. Este análisis permite detectar casos en los que el monto adjudicado puede ser inusualmente alto o bajo en comparación con lo que es típico para ese tipo de contrato, lo que podría señalar varias situaciones que requieren atención.</p>
+    <p>El objetivo detrás de esta señal de alerta es doble. Por un lado, busca asegurar la eficiencia en la asignación de recursos públicos, garantizando que los montos adjudicados reflejen de manera justa el valor de mercado de los bienes o servicios contratados. Por otro lado, sirve como mecanismo de control para prevenir y detectar posibles irregularidades, como sobreprecios, subprecios, o prácticas anticompetitivas que podrían indicar colusión entre oferentes, favoritismo hacia ciertos proveedores, o incluso corrupción.</p>
+        
+    <table style="max-width: 100%;">
+        <thead>
+            <tr>
+                <th>Nog Concurso</th>
+                <th style="max-width: 100px;">Descripción</th>
+                <th>Categoría</th>
+                <th>Monto</th>
+                <th>Promedio de Montos en esta categoría</th>
+                <th>Desviación Porcentual</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flag in red_flags %}
+            <tr>
+                <td>{{ flag['nogConcurso'] }}</td>
+                <td>{{ flag['descripcion'] }}</td>
+                <td>{{ flag['categorias'] }}</td>
+                <td>Q{{ flag['monto'] }}</td>
+                <td>Q{{ flag['promedio_monto'] }}</td>
+                <td>{{ flag['desviacion_porcentual'] }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
