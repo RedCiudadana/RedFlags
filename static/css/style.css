@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background-color: #007BFF;
+    background-color: #000;
     color: #ffffff;
     padding: 20px;
     text-align: center;
@@ -44,23 +44,24 @@ footer {
 
 .button {
     display: inline-block;
-    background-color: #007bff;
+    background-color: #000;
     color: #ffffff;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     text-align: center;
+    transition: 0.5s all ease;
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #F1D61B;
     cursor: pointer;
 }
 
 /* Estilos del Menú de Navegación */
 .nav-wrapper {
-    background-color: #007bff;
+    background-color: #000;
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
@@ -88,7 +89,7 @@ ul#nav-mobile li a {
 }
 
 ul#nav-mobile li a:hover {
-    background-color: #0056b3;
+    background-color: #000;
     border-radius: 5px;
 }
 
