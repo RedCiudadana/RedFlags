@@ -18,21 +18,21 @@ app = Flask(__name__)
 app.json_encoder = CustomJSONEncoder
 
 # Parámetros de conexión a la base de datos
-db_params = {
-    "dbname": "concursos_presupuesto",
-    "user": "postgres",
-    "password": "123",
-    "host": "localhost"
-}
-
-# # Parámetros de conexión a la base de datos
 # db_params = {
 #     "dbname": "concursos_presupuesto",
-#     "user": "redciudadana",
-#     "password": "Jy3qGPRxNOb99ctNxzfK041tFm9V9d4O",
-#     "host": "dpg-cncd9bect0pc73fqrqu0-a.oregon-postgres.render.com",
-#     "port": "5432" # Add this if your database is using a non-default port
+#     "user": "postgres",
+#     "password": "123",
+#     "host": "localhost"
 # }
+
+# # Parámetros de conexión a la base de datos
+db_params = {
+    "dbname": "concursos_presupuesto",
+    "user": "redciudadana",
+    "password": "Jy3qGPRxNOb99ctNxzfK041tFm9V9d4O",
+    "host": "dpg-cncd9bect0pc73fqrqu0-a.oregon-postgres.render.com",
+    "port": "5432" # Add this if your database is using a non-default port
+}
 
 def get_db_connection():
     conn = psycopg2.connect(**db_params)
