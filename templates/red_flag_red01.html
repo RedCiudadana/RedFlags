@@ -7,31 +7,34 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Detalle de Red Flag Red01</h1>
+    <div style="display: flex;">
+        <h1 style="margin-right: 20px;">Detalle de Red Flag Red01</h1>
+        <a class="page-button" href="/">Ver más Red Flags</a>
+    </div>
     <p>Se orienta hacia la identificación de aquellos procesos de licitación cuya extensión temporal, desde su anuncio oficial hasta la adjudicación final, supera un umbral predeterminado, como podrían ser 120 días. Este indicador es crucial ya que una duración prolongada puede revelar una serie de problemáticas subyacentes en el proceso de contratación, tales como ineficiencias operativas, complicaciones de índole legal, o incluso conductas que comprometan la transparencia y equidad del proceso.</p>
     <p>Una duración excesiva no solamente implica potenciales retrasos en la entrega de proyectos o servicios esenciales, sino que también puede disuadir a potenciales oferentes de participar en futuras licitaciones, limitando así la competencia y posiblemente incrementando los costos para la entidad contratante. Este tipo de situaciones es especialmente relevante en contextos donde la rapidez y eficiencia en la asignación y utilización de recursos públicos son fundamentales para satisfacer las necesidades de la comunidad y asegurar el desarrollo sostenible.</p>
-    <table style="max-width: 100%;">
-        <thead>
-            <tr>
-                <th>Nog Concurso</th>
-                <th style="max-width: 100px;">Descripción</th>
-                <th>Nombre de la entidad compradora</th>
-                <th>Fecha de Publicación</th>
-                <th>Fecha de Cierre de Concurso</th>
-                <th>Duración del Concurso en días</th>
-            </tr>
-        </thead>
-        <tbody>
+    
+    <div class="table-container">
+        <div class="table-header">
+            <div class="table-cell" style="flex:0.1">Nog Concurso</div>
+            <div class="table-cell" style="flex:0.3">Descripción</div>
+            <div class="table-cell" style="flex:0.3">Nombre de la entidad compradora</div>
+            <div class="table-cell" style="flex:0.1">Fecha de Publicación</div>
+            <div class="table-cell" style="flex:0.1">Fecha de Cierre de Concurso</div>
+            <div class="table-cell" style="flex:0.1">Duración del Concurso en días</div>
+        </div>
+        <div class="table-body">
             {% for flag in red_flags %}
-            <tr>
-                <td>{{ flag['nogConcurso'] }}</td>
-                <td>{{ flag['descripcion'] }}</td>
-                <td>{{ flag['entidadCompradora'] }}</td>
-                <td>{{ flag['fechaDePublicacion'] }}</td>
-                <td>{{ flag['fechaCierreRecepcionOfertas'] }}</td>
-                <td>{{ flag['duracion_concurso_dias'] }}</td>
-            </tr>
+            <div class="table-row">
+                <div class="table-cell" style="flex:0.1">{{ flag['nogConcurso'] }}</div>
+                <div class="table-cell" style="flex:0.3">{{ flag['descripcion'] }}</div>
+                <div class="table-cell" style="flex:0.3">{{ flag['entidadCompradora'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['fechaDePublicacion'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['fechaCierreRecepcionOfertas'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['duracion_concurso_dias'] }}</div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
+
 {% endblock %}

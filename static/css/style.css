@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #e7ecf3;
 }
 
 header {
@@ -104,3 +105,77 @@ ul#nav-mobile li a:hover {
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 960px) {
+    .img_especial {
+        display: none;
+    }
+    .table-row{
+      display: block!important;
+    }
+    .justify-content-end-custom{
+      justify-content: start!important;
+    }
+  }
+  
+  .table-container {
+    width: 100%;
+  }
+  
+  .table-row {
+    display: flex;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 10px 0;
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .table-cell {
+    flex: 1;
+    padding: 15px;
+    text-align: start;
+    display: flex;
+  }
+  
+  .table-cell img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Estilos para el encabezado de la "tabla" */
+  .table-header {
+    display: flex;
+    border-radius: 10px;
+    margin: 10px 0;
+    align-items: center;
+    font-weight: 600;
+  }
+  
+  .table-header .table-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: start;
+  }
+
+  .page-button{
+    color: black;
+    padding: 15px 25px;
+    border-radius: 5px/2px;
+    align-self: center;
+    background-color: #F1D61B;
+    border: 0.2px solid #F1D61B;
+    text-transform: uppercase;
+    width: fit-content;
+    font-weight: 600;
+    transition: 0.5s;
+    text-decoration: none;
+  }
+  
+  .page-button:hover{
+    color: #F1D61B;
+    border: 0.2px solid #000;
+    background: #000;
+  }

@@ -7,7 +7,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Detalle de Red Flag Red03</h1>
+    <div style="display: flex;">
+        <h1 style="margin-right: 20px;">Detalle de Red Flag Red03</h1>
+        <a class="page-button" href="/">Ver más Red Flags</a>
+    </div>
     <p>El principal objetivo de esta red flag es resaltar posibles ineficiencias o irregularidades en el proceso de adjudicación de contratos. Un retraso significativo puede ser indicativo de varios problemas, tales como:
     </p>
     <ul>
@@ -16,29 +19,28 @@
         <li>Negociaciones Inapropiadas: Después de la decisión de adjudicación, podrían surgir negociaciones no éticas que busquen modificar términos del contrato de manera ventajosa para alguna de las partes.</li>
         <li>Problemas Administrativos o Burocráticos: Retrasos en la formalización también pueden ser resultado de ineficiencias administrativas dentro de la entidad contratante.</li>
     </ul>
-        
-    <table style="max-width: 100%;">
-        <thead>
-            <tr>
-                <th>Nog Concurso</th>
-                <th style="max-width: 100px;">Descripción</th>
-                <th>Nombre de la entidad compradora</th>
-                <th>Fecha de Última Adjudicación</th>
-                <th>Fecha de Adjudicación</th>
-                <th>Días de Retraso</th>
-            </tr>
-        </thead>
-        <tbody>
+
+    <div class="table-container">
+        <div class="table-header">
+            <div class="table-cell" style="flex:0.1">Nog Concurso</div>
+            <div class="table-cell" style="flex:0.3">Descripción</div>
+            <div class="table-cell" style="flex:0.3">Nombre de la entidad compradora</div>
+            <div class="table-cell" style="flex:0.1">Fecha de Última Adjudicación</div>
+            <div class="table-cell" style="flex:0.1">Fecha de Adjudicación</div>
+            <div class="table-cell" style="flex:0.1">Días de Retraso</div>
+        </div>
+        <div class="table-body">
             {% for flag in red_flags %}
-            <tr>
-                <td>{{ flag['nogConcurso'] }}</td>
-                <td>{{ flag['descripcion'] }}</td>
-                <td>{{ flag['entidadCompradora'] }}</td>
-                <td>{{ flag['fechaDeUltimaAdjudicacion'] }}</td>
-                <td>{{ flag['fechaDeAdjudicacion'] }}</td>
-                <td>{{ flag['dias_de_retraso'] }}</td>
-            </tr>
+            <div class="table-row">
+                <div class="table-cell" style="flex:0.1">{{ flag['nogConcurso'] }}</div>
+                <div class="table-cell" style="flex:0.3">{{ flag['descripcion'] }}</div>
+                <div class="table-cell" style="flex:0.3">{{ flag['entidadCompradora'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['fechaDeUltimaAdjudicacion'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['fechaDeAdjudicacion'] }}</div>
+                <div class="table-cell" style="flex:0.1">{{ flag['dias_de_retraso'] }}</div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
+
 {% endblock %}

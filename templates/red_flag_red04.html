@@ -7,24 +7,25 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Detalle de Red Flag Red04</h1>
+    <div style="display: flex;">
+        <h1 style="margin-right: 20px;">Detalle de Red Flag Red04</h1>
+        <a class="page-button" href="/">Ver más Red Flags</a>
+    </div>
     <p>Está diseñada para identificar a aquellos concursantes que aparecen una o dos veces en el conjunto total de concursos registrados dentro de una base de datos de contratación pública. Este indicador busca resaltar la participación de entidades que, por su escasa presencia en licitaciones, podrían considerarse atípicas o merecedoras de un análisis más profundo. La razón para focalizar en estos concursantes es múltiple y puede abarcar desde la detección de nuevas empresas intentando ingresar al mercado hasta la identificación de empresas potencialmente creadas para participar en concursos específicos, pasando por la posibilidad de encontrar prácticas que limiten la competencia justa y abierta.</p>
     <p>El objetivo principal detrás de esta red flag es promover la transparencia y la equidad en los procesos de contratación pública. Al identificar a estos concursantes inusuales, se pueden tomar medidas para investigar su historial, capacidad, y legitimidad, asegurando así que todos los participantes en una licitación cumplen con los requisitos y están en igualdad de condiciones para competir. Este análisis también puede ayudar a prevenir el favoritismo, el fraude, y otras prácticas anticompetitivas que podrían afectar negativamente la calidad y el costo de los bienes y servicios adquiridos por entidades públicas.</p>
-        
-    <table style="max-width: 100%;">
-        <thead>
-            <tr>
-                <th>Nombre del Concursante</th>
-                <th>Número de concursos a su nombre</th>
-            </tr>
-        </thead>
-        <tbody>
+       
+    <div class="table-container">
+        <div class="table-header">
+            <div class="table-cell" style="flex:0.1">Nombre del Concursante</div>
+            <div class="table-cell" style="flex:0.3">Número de concursos a su nombre</div>
+        </div>
+        <div class="table-body">
             {% for flag in red_flags %}
-            <tr>
-                <td>{{ flag['nombre'] }}</td>
-                <td>{{ flag['cantidad_de_veces'] }}</td>
-            </tr>
+            <div class="table-row">
+                <div class="table-cell" style="flex:0.1">{{ flag['nombre'] }}</div>
+                <div class="table-cell" style="flex:0.3">{{ flag['cantidad_de_veces'] }}</div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    </div>
 {% endblock %}

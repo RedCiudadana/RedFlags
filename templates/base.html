@@ -8,18 +8,18 @@
     {% block head_extra %}{% endblock %}
 </head>
 <body>
-    <header>
+    <!-- <header>
         <nav>
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo"><img src="{{ url_for('static', filename='/img/LOGO-Red_BLANCO.png') }}"></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/redflags">Red Flags</a></li>
-                    <!-- Agrega más enlaces según sea necesario -->
+                    
                 </ul>
             </div>
         </nav>
-    </header>
+    </header> -->
 
     <main>
         {% block content %}
@@ -27,10 +27,10 @@
         {% endblock %}
     </main>
 
-    <div style="height: 100px;"></div>
+    <!-- <div style="height: 100px;"></div>
     <footer>
         <p>&copy; 2024 Red Ciudadana. Todos los derechos reservados.</p>
-    </footer>
+    </footer> -->
 
     {% block scripts %}
     <!-- Bloque para scripts al final del body que puede ser sobreescrito -->
