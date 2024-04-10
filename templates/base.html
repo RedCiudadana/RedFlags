@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Red Flags{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     {% block head_extra %}{% endblock %}
 </head>
 <body>
+
+    <!-- Preloader Start -->
+	<div id="preloader-active">
+		<div class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="text-center">
+					<img src="{{ url_for('static', filename='img/loader.png') }}" class="preoloader-img" />
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- <header>
         <nav>
             <div class="nav-wrapper">
@@ -33,7 +45,20 @@
     </footer> -->
 
     {% block scripts %}
-    <!-- Bloque para scripts al final del body que puede ser sobreescrito -->
+    <script>
+		(function ($) {
+			("use strict");
+			// Page loading
+			$(window).on("load", function () {
+				$("#preloader-active").delay(450).fadeOut("slow");
+				$("body").delay(450).css({
+					overflow: "visible"
+				});
+				$("#onloadModal").modal("show");
+			});
+		
+		})(jQuery);
+	</script>
     {% endblock %}
 </body>
 </html>
