@@ -182,7 +182,7 @@ ul#nav-mobile li a:hover {
 
   /*page loading*/
 .preloader {
-  background-color: #fff;
+  background-color: #e7ecf3;
   width: 100%;
   height: 100%;
   position: fixed;
